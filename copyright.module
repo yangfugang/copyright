@@ -1,0 +1,48 @@
+<?php
+/**
+ * hook_form_FORM_ID_alter
+ */
+ function copyright_form_system_site_information_settings_alter(&$form, &$form_state) {
+ 	$form['site_information']['free_post'] = array(
+		'#type' => 'textfield',
+		'#title' => '免邮费金额',
+		'#default_value' => variable_get('free_post'),
+		'#description' => '设置一个金额，当用户订单金额多于这个数目，减免运费。',
+		'#element_validate' => array('save_free_post'),
+	);
+ 	$form['site_information']['record'] = array(
+		'#type' => 'textfield',
+		'#title' => '备案信息',
+		'#default_value' => variable_get('site_record'),
+		'#description' => '填写网站的备案信息。',
+		'#element_validate' => array('save_record'),
+	);
+	$form['site_information']['copyright'] = array(
+		'#type' => 'textfield',
+		'#title' => '版权信息',
+		'#default_value' => variable_get('site_copyright'),
+		'#description' => '填写网站版权信息。',
+		'#element_validate' => array('save_copyright'),
+	);
+ }
+ 
+ /**
+  * 保存海报
+  */
+function save_free_post($element, &$form_state, $form) {
+	if(isset($element['#value'])) variable_set('free_post', $element['#value']);
+}
+
+/**
+ * 保存备案信息
+ */
+ function save_record($element, &$form_state, $form) {
+ 	if(isset($element['#value'])) variable_set('site_record', $element['#value']);
+ }
+ 
+/**
+ * 保存版权信息
+ */
+ function save_copyright($element, &$form_state, $form) {
+ 	if(isset($element['#value'])) variable_set('site_copyright', $element['#value']);
+ }

@@ -1,0 +1,4 @@
+name = Copyright
+description = 定义网站版权信息和备案信息。
+core = 7.x
+package = Custom
